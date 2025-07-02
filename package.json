@@ -17,5 +17,17 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "vercel-build": "npx prisma generate && npx prisma migrate deploy"
-  }
+  },
+  "builds": [
+    {
+      "src": "src/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "(.*)",
+      "dest": "src/server.ts"
+    }
+  ]
 }
