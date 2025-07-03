@@ -17,9 +17,4 @@ server.use(express.json());
 
 server.use(mainRouter);
 
-const port = process.env.PORT || 5000;
-server.listen(port, () => {
-  console.log(
-    `🚀 Servidor rodando em http://localhost:${port}`
-  );
-});
+export default server;
