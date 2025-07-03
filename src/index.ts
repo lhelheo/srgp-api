@@ -1,19 +1,25 @@
-import express from "express";
+import express, {
+  urlencoded,
+} from "express";
+import "dotenv/config";
 import cors from "cors";
-import projectRoutes from "./api/routes/projectRoutes";
+import helmet from "helmet";
+import { mainRouter } from "./api/routes/main";
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use("/", projectRoutes);
+const server = express();
+server.use(helmet());
+server.use(cors());
+server.use(
+  urlencoded({ extended: true })
+);
+server.disable("x-powered-by");
+server.use(express.json());
 
-app.get("/test", (req, res) => {
-  res
-    .status(200)
-    .json({
-      message:
-        "Test endpoint is working!",
-    });
+server.use(mainRouter);
+
+const port = process.env.PORT || 5000;
+server.listen(port, () => {
+  console.log(
+    `🚀 Servidor rodando em http://localhost:${port}`
+  );
 });
-
-export default app;
