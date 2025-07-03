@@ -3,22 +3,17 @@ import cors from "cors";
 import projectRoutes from "./api/routes/projectRoutes";
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 app.use("/", projectRoutes);
-app.get("/test", (req, res) => {
-  res.status(200).json({
-    message:
-      "Test endpoint is working!",
-  });
-  return;
-});
 
-app.listen(3000, () => {
-  console.log(
-    "Server is running on port 3000"
-  );
+app.get("/test", (req, res) => {
+  res
+    .status(200)
+    .json({
+      message:
+        "Test endpoint is working!",
+    });
 });
 
 export default app;
